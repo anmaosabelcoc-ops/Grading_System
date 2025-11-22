@@ -1,0 +1,83 @@
+# MADAFAKA
+records = []
+
+while True:
+
+    print("Welcome to our Grading system:")
+    print ("Note: Please put the student score on the socres, then put the score of all activities on the total score")
+    id = input("Enter student ID: ")
+    name = input("Enter Student Name: ")
+    print("\n")
+    
+    # Activities
+    print("-Activities-")
+    print("This includes Written Works, Quizzes, Homework/Assignments ")
+    activities = int(input("Enter number of activities: "))
+    
+    total_activities = 0
+    for i in range(activities):
+        score = float(input(f"Enter score for Activity {i + 1}: "))
+        total_activities += score
+
+    max_score = float(input("Enter overall score of the activities: "))
+    
+    # Exam
+    print("\n-Exam-")
+    exam_score = float(input("Exam Score: "))
+    total_exam = float(input("Total Exam Score: "))
+    
+    # PT
+    print("\n-PT-")
+    total_pt = int(input("Enter number of PT: "))
+    
+    total_pt_score = 0
+    for i in range(total_pt):
+        score = float(input(f"Enter score for PT {i + 1}: "))
+        total_pt_score += score
+    
+    max_pt = float(input("Enter total PT score: "))
+
+    # Calculations
+    activities_grade = (total_activities / max_score) * 20
+    exam_grade = (exam_score / total_exam) * 30
+    pt_grade = (total_pt_score / max_pt) * 50
+    final_percentage = activities_grade + exam_grade + pt_grade
+
+    # Passed or Failed
+    if final_percentage >= 75:
+        status = "PASSED" 
+    else:
+        status = "FAILED"
+
+    # Store record in the list
+    records.append([
+        id,
+        name,
+        round(activities_grade, 2),
+        round(exam_grade, 2),
+        round(pt_grade, 2),
+        round(final_percentage, 2),
+        status
+    ])
+
+    # Ask if want to add another student
+    another = input("\nDo you want to add another student? (yes/no): ").lower()
+    if another != "yes":
+        break
+
+
+
+#TABLE OF ALL STUDENTS
+
+print("\n ALL STUDENT RECORDS")
+
+# Table Header
+print(f"{'Student ID':<25}{'Name':<20}{'Activities':<15}{'Exam':<10}{'PT':<10}{'Final %':<10}{'Status':<10}")
+print("-" * 100)
+
+# Table Rows
+for rec in records:
+    print(f"{rec[0]:<25}{rec[1]:<20}{rec[2]:<15}{rec[3]:<10}{rec[4]:<10}{rec[5]:<10}{rec[6]:<10}")
+
+print("\n")
+print("Thank you for using our system!")
